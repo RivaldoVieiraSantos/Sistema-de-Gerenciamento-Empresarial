@@ -8,34 +8,43 @@ static int totalClientes = 0;
 static int proximoCodigo = 1;
 
 void cadastrarCliente(void) {
-    if (totalClientes >= MAX_CLIENTES) {
-        printf("Limite de %d clientes atingido.\n", MAX_CLIENTES);
-        return;
-    }
+    int continuar;
 
-    Cliente novo;
-    novo.codCliente = proximoCodigo;
+    do {
+        if (totalClientes >= MAX_CLIENTES) {
+            printf("Limite de %d clientes atingido.\n", MAX_CLIENTES);
+            return;
+        }
 
-    printf("\n--- Cadastro de Cliente (codigo %d) ---\n", novo.codCliente);
+        Cliente novo;
+        novo.codCliente = proximoCodigo;
 
-    printf("Nome: ");
-    lerTexto(novo.nomeCliente, sizeof(novo.nomeCliente));
+        printf("\n--- Cadastro de Cliente (codigo %d) ---\n", novo.codCliente);
 
-    printf("CPF (somente numeros): ");
-    novo.CPFCliente = lerInteiro();
+        printf("Nome: ");
+        lerTexto(novo.nomeCliente, sizeof(novo.nomeCliente));
 
-    printf("Telefone: ");
-    novo.telefoneCliente = lerInteiro();
+        printf("CPF (somente numeros): ");
+        novo.CPFCliente = lerInteiro();
 
-    printf("Cidade: ");
-    lerTexto(novo.cidadeCliente, sizeof(novo.cidadeCliente));
+        printf("Telefone: ");
+        novo.telefoneCliente = lerInteiro();
 
-    printf("Email: ");
-    lerTexto(novo.emailCliente, sizeof(novo.emailCliente));
+        printf("Cidade: ");
+        lerTexto(novo.cidadeCliente, sizeof(novo.cidadeCliente));
 
-    clientes[totalClientes] = novo;
-    totalClientes++;
-    proximoCodigo++;
+        printf("Email: ");
+        lerTexto(novo.emailCliente, sizeof(novo.emailCliente));
 
-    printf("Cliente cadastrado com sucesso! Codigo: %d\n", novo.codCliente);
+        clientes[totalClientes] = novo;
+        totalClientes++;
+        proximoCodigo++;
+
+        printf("Cliente cadastrado com sucesso! Codigo: %d\n", novo.codCliente);
+
+        printf("\nSe desejar cadastrar um novo cliente digite 1, para sair digite 0: ");
+        continuar = lerInteiro();
+    } while (continuar == 1);
+
+    printf("Cadastro concluido. Total de clientes: %d\n", totalClientes);
 }
