@@ -30,19 +30,19 @@ void menuClientes(void) {
                 break;
 
             case 2:
-                printf("\nFuncao de listar clientes ainda sera implementada.\n");
+                printf("\nFuncao de listar clientes está em desenvolvimento.\n");
                 break;
 
             case 3:
-                printf("\nFuncao de buscar cliente ainda sera implementada.\n");
+                printf("\nFuncao de buscar cliente está em desenvolvimento.\n");
                 break;
 
             case 4:
-                printf("\nFuncao de alterar cliente ainda sera implementada.\n");
+                printf("\nFuncao de alterar cliente está em desenvolvimento.\n");
                 break;
 
             case 5:
-                printf("\nFuncao de excluir cliente ainda sera implementada.\n");
+                printf("\nFuncao de excluir cliente está em desenvolvimento.\n");
                 break;
 
             case 0:
