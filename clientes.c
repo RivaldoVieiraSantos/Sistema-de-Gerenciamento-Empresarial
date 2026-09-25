@@ -48,3 +48,30 @@ void cadastrarCliente(void) {
 
     printf("Cadastro concluido. Total de clientes: %d\n", totalClientes);
 }
+
+void listarClientes(void) {
+    if (totalClientes == 0) {
+        printf("\nNenhum cliente cadastrado.\n");
+        printf("Se desejar cadastrar um cliente digite 1, para sair digite 0: ");
+
+        if (lerInteiro() == 1) {
+            cadastrarCliente();
+        }
+
+        /* Se ainda nao tem cliente (digitou 0), sai sem listar */
+        if (totalClientes == 0) {
+            return;
+        }
+    }
+
+    printf("\n--- Lista de Clientes (%d) ---\n", totalClientes);
+
+    for (int i = 0; i < totalClientes; i++) {
+        printf("\nCodigo:   %d\n", clientes[i].codCliente);
+        printf("Nome:     %s\n", clientes[i].nomeCliente);
+        printf("CPF:      %d\n", clientes[i].CPFCliente);
+        printf("Telefone: %d\n", clientes[i].telefoneCliente);
+        printf("Cidade:   %s\n", clientes[i].cidadeCliente);
+        printf("Email:    %s\n", clientes[i].emailCliente);
+    }
+}
