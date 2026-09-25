@@ -40,7 +40,7 @@ void cadastrarCliente(void) {
         totalClientes++;
         proximoCodigo++;
 
-        printf("Cliente cadastrado com sucesso! Codigo: %d\n", novo.codCliente);
+        printf("Cliente \"%s\" cadastrado com sucesso!\n", novo.nomeCliente);
 
         do {
             printf("\nSe desejar cadastrar um novo cliente digite 1, para ver os clientes cadastrados digite 2, para sair digite 0: ");
