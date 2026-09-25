@@ -30,7 +30,7 @@ void menuClientes(void) {
                 break;
 
             case 2:
-                printf("\nFuncao de listar clientes está em desenvolvimento.\n");
+                listarClientes();
                 break;
 
             case 3:

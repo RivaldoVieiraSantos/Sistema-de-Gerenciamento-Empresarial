@@ -42,8 +42,14 @@ void cadastrarCliente(void) {
 
         printf("Cliente cadastrado com sucesso! Codigo: %d\n", novo.codCliente);
 
-        printf("\nSe desejar cadastrar um novo cliente digite 1, para sair digite 0: ");
-        continuar = lerInteiro();
+        do {
+            printf("\nSe desejar cadastrar um novo cliente digite 1, para ver os clientes cadastrados digite 2, para sair digite 0: ");
+            continuar = lerInteiro();
+
+            if (continuar == 2) {
+                listarClientes();
+            }
+        } while (continuar == 2);
     } while (continuar == 1);
 
     printf("Cadastro concluido. Total de clientes: %d\n", totalClientes);
