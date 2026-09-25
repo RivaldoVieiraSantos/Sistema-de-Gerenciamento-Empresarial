@@ -19,7 +19,10 @@ void cadastrarCliente(void) {
         Cliente novo;
         novo.codCliente = proximoCodigo;
 
-        printf("\n--- Cadastro de Cliente (codigo %d) ---\n", novo.codCliente);
+        printf("\n");
+        printf("========================================\n");
+        printf("      CADASTRO DE CLIENTE (codigo %d)\n", novo.codCliente);
+        printf("========================================\n");
 
         printf("Nome: ");
         lerTexto(novo.nomeCliente, sizeof(novo.nomeCliente));
@@ -40,10 +43,16 @@ void cadastrarCliente(void) {
         totalClientes++;
         proximoCodigo++;
 
+        printf("----------------------------------------\n");
         printf("Cliente \"%s\" cadastrado com sucesso!\n", novo.nomeCliente);
+        printf("----------------------------------------\n");
 
         do {
-            printf("\nSe desejar cadastrar um novo cliente digite 1, para ver os clientes cadastrados digite 2, para sair digite 0: ");
+            printf("\nO que gostaria de fazer agora?\n");
+            printf("1 - Cadastrar um novo cliente\n");
+            printf("2 - Ver os clientes cadastrados\n");
+            printf("0 - Sair\n");
+            printf("Escolha uma opcao: ");
             continuar = lerInteiro();
 
             if (continuar == 2) {
@@ -52,12 +61,16 @@ void cadastrarCliente(void) {
         } while (continuar == 2);
     } while (continuar == 1);
 
+    printf("\n----------------------------------------\n");
     printf("Cadastro concluido. Total de clientes: %d\n", totalClientes);
+    printf("----------------------------------------\n");
 }
 
 void listarClientes(void) {
     if (totalClientes == 0) {
-        printf("\nNenhum cliente cadastrado.\n");
+        printf("\n----------------------------------------\n");
+        printf("Nenhum cliente cadastrado.\n");
+        printf("----------------------------------------\n");
         printf("Se desejar cadastrar um cliente digite 1, para sair digite 0: ");
 
         if (lerInteiro() == 1) {
@@ -70,14 +83,22 @@ void listarClientes(void) {
         }
     }
 
-    printf("\n--- Lista de Clientes (%d) ---\n", totalClientes);
+    printf("\n");
+    printf("========================================\n");
+    printf("        LISTA DE CLIENTES (%d)\n", totalClientes);
+    printf("========================================\n");
 
     for (int i = 0; i < totalClientes; i++) {
-        printf("\nCodigo:   %d\n", clientes[i].codCliente);
+        if (i > 0) {
+            printf("----------------------------------------\n");
+        }
+        printf("Codigo:   %d\n", clientes[i].codCliente);
         printf("Nome:     %s\n", clientes[i].nomeCliente);
         printf("CPF:      %d\n", clientes[i].CPFCliente);
         printf("Telefone: %d\n", clientes[i].telefoneCliente);
         printf("Cidade:   %s\n", clientes[i].cidadeCliente);
         printf("Email:    %s\n", clientes[i].emailCliente);
     }
+
+    printf("========================================\n");
 }
