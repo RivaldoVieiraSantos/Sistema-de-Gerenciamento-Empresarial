@@ -62,8 +62,16 @@ Trabalho da Disciplina Algoritmos e Programação II
 
 ## Compilar
 
+Linux/Mac:
+
 ```
 gcc main.c clientes.c produtos.c utils.c -o sistema
+```
+
+Windows:
+
+```
+gcc main.c clientes.c produtos.c utils.c -o sistema.exe
 ```
 
 ## Executar
