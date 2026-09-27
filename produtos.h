@@ -5,8 +5,11 @@
 
 #define MAX_PRODUTOS 100
 
-/* Cadastro e listagem de  */
-void cadastrarProdutos(void);
-void listarProduto(void);
+/* Cadastro, listagem, busca, alteracao e exclusao de produtos */
+void cadastrarProduto(void);
+void listarProdutos(void);
+void buscarProduto(void);
+void alterarProduto(void);
+void excluirProduto(void);
 
 #endif
