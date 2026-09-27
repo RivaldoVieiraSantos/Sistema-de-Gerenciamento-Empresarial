@@ -12,11 +12,11 @@ typedef struct {
 } Cliente;
 
 typedef struct {
-    char nomeProduto[20];
-    int  codProduto;
-    int  precoProduto;
-    int  quantidadeProduto;
-    char categoriaProduto;
+    int   codProduto;
+    char  nomeProduto[50];
+    char  categoriaProduto[50];
+    float precoProduto;
+    int   quantidadeProduto;
 
 } Produto;
 

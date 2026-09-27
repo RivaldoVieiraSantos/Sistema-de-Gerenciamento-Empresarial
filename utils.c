@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "utils.h"
 
 /* Lê uma linha de texto (aceita espaços) e remove o '\n' do final */
@@ -16,4 +17,20 @@ int lerInteiro(void) {
     scanf("%d", &valor);
     while ((c = getchar()) != '\n' && c != EOF);
     return valor;
+}
+
+/* Le um numero com casas decimais (ex.: preco).
+   Aceita virgula ou ponto: 3,50 ou 3.50 */
+float lerDecimal(void) {
+    char texto[50];
+
+    lerTexto(texto, sizeof(texto));
+
+    for (int i = 0; texto[i] != '\0'; i++) {
+        if (texto[i] == ',') {
+            texto[i] = '.';
+        }
+    }
+
+    return atof(texto);
 }
