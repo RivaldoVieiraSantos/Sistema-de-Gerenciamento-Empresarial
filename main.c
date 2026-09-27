@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "structs.h"
 #include "clientes.h"
+#include "produtos.h"
 #include "utils.h"
 
 
@@ -57,6 +58,59 @@ void menuClientes(void) {
 }
 
 
+void menuProdutos(void) {
+    int opcao;
+
+    do {
+        printf("\n");
+        printf("========================================\n");
+        printf("             MENU PRODUTOS              \n");
+        printf("========================================\n");
+        printf("1 - Cadastrar produto\n");
+        printf("2 - Listar produtos\n");
+        printf("3 - Buscar produto\n");
+        printf("4 - Alterar produto\n");
+        printf("5 - Excluir produto\n");
+        printf("0 - Voltar\n");
+        printf("========================================\n");
+        printf("Escolha uma opcao: ");
+
+        opcao = lerInteiro();
+
+        switch (opcao) {
+
+            case 1:
+                cadastrarProduto();
+                break;
+
+            case 2:
+                listarProdutos();
+                break;
+
+            case 3:
+                buscarProduto();
+                break;
+
+            case 4:
+                alterarProduto();
+                break;
+
+            case 5:
+                excluirProduto();
+                break;
+
+            case 0:
+                printf("\nVoltando ao menu principal...\n");
+                break;
+
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+        }
+
+    } while (opcao != 0);
+}
+
+
 void menuPrincipal(void) {
     int opcao;
 
@@ -81,7 +135,7 @@ void menuPrincipal(void) {
                 break;
 
             case 2:
-                printf("\nModulo de produtos está em desenvolvimento.\n");
+                menuProdutos();
                 break;
 
             case 3:
