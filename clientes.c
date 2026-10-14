@@ -19,7 +19,7 @@ void cadastrarCliente(void) {
         Cliente novo;
         novo.codCliente = proximoCodigo;
 
-        printf("\n");
+        limparTela();
         printf("========================================\n");
         printf("      CADASTRO DE CLIENTE (codigo %d)\n", novo.codCliente);
         printf("========================================\n");
@@ -28,10 +28,10 @@ void cadastrarCliente(void) {
         lerTexto(novo.nomeCliente, sizeof(novo.nomeCliente));
 
         printf("CPF (somente numeros): ");
-        novo.CPFCliente = lerInteiro();
+        lerDigitos(novo.CPFCliente, sizeof(novo.CPFCliente), 11, 11);
 
-        printf("Telefone: ");
-        novo.telefoneCliente = lerInteiro();
+        printf("Telefone com DDD (somente numeros): ");
+        lerDigitos(novo.telefoneCliente, sizeof(novo.telefoneCliente), 10, 11);
 
         printf("Cidade: ");
         lerTexto(novo.cidadeCliente, sizeof(novo.cidadeCliente));
@@ -68,7 +68,8 @@ void cadastrarCliente(void) {
 
 void listarClientes(void) {
     if (totalClientes == 0) {
-        printf("\n----------------------------------------\n");
+        limparTela();
+        printf("----------------------------------------\n");
         printf("Nenhum cliente cadastrado.\n");
         printf("----------------------------------------\n");
         printf("Se desejar cadastrar um cliente digite 1, para sair digite 0: ");
@@ -83,7 +84,7 @@ void listarClientes(void) {
         }
     }
 
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("        LISTA DE CLIENTES (%d)\n", totalClientes);
     printf("========================================\n");
@@ -94,8 +95,8 @@ void listarClientes(void) {
         }
         printf("Codigo:   %d\n", clientes[i].codCliente);
         printf("Nome:     %s\n", clientes[i].nomeCliente);
-        printf("CPF:      %d\n", clientes[i].CPFCliente);
-        printf("Telefone: %d\n", clientes[i].telefoneCliente);
+        printf("CPF:      %s\n", clientes[i].CPFCliente);
+        printf("Telefone: %s\n", clientes[i].telefoneCliente);
         printf("Cidade:   %s\n", clientes[i].cidadeCliente);
         printf("Email:    %s\n", clientes[i].emailCliente);
     }

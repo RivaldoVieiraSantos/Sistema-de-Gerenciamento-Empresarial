@@ -9,7 +9,7 @@ void menuClientes(void) {
     int opcao;
 
     do {
-        printf("\n");
+        limparTela();
         printf("========================================\n");
         printf("             MENU CLIENTES              \n");
         printf("========================================\n");
@@ -54,6 +54,10 @@ void menuClientes(void) {
                 printf("\nOpcao invalida! Tente novamente.\n");
         }
 
+        if (opcao != 0) {
+            pausar();
+        }
+
     } while (opcao != 0);
 }
 
@@ -62,7 +66,7 @@ void menuProdutos(void) {
     int opcao;
 
     do {
-        printf("\n");
+        limparTela();
         printf("========================================\n");
         printf("             MENU PRODUTOS              \n");
         printf("========================================\n");
@@ -107,6 +111,10 @@ void menuProdutos(void) {
                 printf("\nOpcao invalida! Tente novamente.\n");
         }
 
+        if (opcao != 0) {
+            pausar();
+        }
+
     } while (opcao != 0);
 }
 
@@ -115,7 +123,7 @@ void menuPrincipal(void) {
     int opcao;
 
     do {
-        printf("\n");
+        limparTela();
         printf("========================================\n");
         printf("    SISTEMA DE GERENCIAMENTO EMPRESARIAL\n");
         printf("========================================\n");
@@ -140,6 +148,7 @@ void menuPrincipal(void) {
 
             case 3:
                 printf("\nModulo de estatisticas está em desenvolvimento.\n");
+                pausar();
                 break;
 
             case 0:
@@ -148,6 +157,7 @@ void menuPrincipal(void) {
 
             default:
                 printf("\nOpcao invalida! Tente novamente.\n");
+                pausar();
         }
 
     } while (opcao != 0);

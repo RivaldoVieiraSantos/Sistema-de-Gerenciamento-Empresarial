@@ -35,7 +35,7 @@ void cadastrarProduto(void) {
     Produto novo;
     novo.codProduto = proximoCodigo;
 
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("      CADASTRAR PRODUTO (codigo %d)\n", novo.codProduto);
     printf("========================================\n");
@@ -62,7 +62,7 @@ void cadastrarProduto(void) {
 }
 
 void listarProdutos(void) {
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("        LISTA DE PRODUTOS (%d)\n", totalProdutos);
     printf("========================================\n");
@@ -83,7 +83,7 @@ void listarProdutos(void) {
 }
 
 void buscarProduto(void) {
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("            BUSCAR PRODUTO\n");
     printf("========================================\n");
@@ -102,7 +102,7 @@ void buscarProduto(void) {
 }
 
 void alterarProduto(void) {
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("            ALTERAR PRODUTO\n");
     printf("========================================\n");
@@ -133,7 +133,7 @@ void alterarProduto(void) {
 }
 
 void excluirProduto(void) {
-    printf("\n");
+    limparTela();
     printf("========================================\n");
     printf("            EXCLUIR PRODUTO\n");
     printf("========================================\n");

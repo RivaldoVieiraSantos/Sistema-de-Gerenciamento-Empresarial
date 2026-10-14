@@ -34,7 +34,7 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 | `structs.h`    | structs compartilhadas (Cliente, Produto)                |
 | `clientes.h/c` | módulo de clientes (cadastro e listagem)                 |
 | `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração e exclusão) |
-| `utils.h/c`    | funções de leitura compartilhadas (lerTexto, lerInteiro) |
+| `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
 | `main.c`       | menus (só chama as funções dos módulos)                  |
 
 ## Funcionalidades
