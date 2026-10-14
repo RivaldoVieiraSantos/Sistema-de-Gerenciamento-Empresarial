@@ -32,7 +32,7 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 | Arquivo        | Responsabilidade                                         |
 | -------------- | -------------------------------------------------------- |
 | `structs.h`    | structs compartilhadas (Cliente, Produto)                |
-| `clientes.h/c` | módulo de clientes (cadastro, listagem, alteração e exclusão) |
+| `clientes.h/c` | módulo de clientes (cadastro, listagem, busca, alteração e exclusão) |
 | `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração e exclusão) |
 | `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
 | `main.c`       | menus (só chama as funções dos módulos)                  |
@@ -43,7 +43,7 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 
 - [x] Cadastrar — `cadastrarCliente()`
 - [x] Listar — `listarClientes()`
-- [ ] Buscar por código
+- [x] Buscar por código, nome ou CPF — `buscarCliente()` (nome aceita só uma parte, sem diferenciar maiúsculas)
 - [x] Alterar — `alterarCliente()`
 - [x] Excluir — `excluirCliente()` (pede confirmação)
 

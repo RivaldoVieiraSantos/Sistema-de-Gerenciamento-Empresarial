@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "clientes.h"
 #include "utils.h"
 
@@ -36,6 +37,26 @@ static int procurarPorCPF(const char *cpf) {
         }
     }
     return -1;
+}
+
+/* Retorna 1 se 'trecho' aparece dentro de 'texto', sem diferenciar
+   maiusculas de minusculas (ex.: "cas" encontra "Cassio Dourado") */
+static int contemTexto(const char *texto, const char *trecho) {
+    char textoMin[100], trechoMin[100];
+    int i;
+
+    /* Copia os dois textos em letras minusculas para comparar */
+    for (i = 0; texto[i] != '\0' && i < 99; i++) {
+        textoMin[i] = tolower((unsigned char) texto[i]);
+    }
+    textoMin[i] = '\0';
+
+    for (i = 0; trecho[i] != '\0' && i < 99; i++) {
+        trechoMin[i] = tolower((unsigned char) trecho[i]);
+    }
+    trechoMin[i] = '\0';
+
+    return strstr(textoMin, trechoMin) != NULL;
 }
 
 /* Le um CPF e repete a pergunta se ele ja for de outro cliente.
@@ -243,6 +264,93 @@ void listarClientes(void) {
     }
 
     printf("========================================\n");
+}
+
+/* Mostra o resultado de uma busca que acha no maximo um cliente */
+static void mostrarResultado(int i) {
+    if (i == -1) {
+        printf("\nCliente nao encontrado.\n");
+        return;
+    }
+
+    printf("----------------------------------------\n");
+    mostrarCliente(&clientes[i]);
+    printf("----------------------------------------\n");
+}
+
+/* Mostra todos os clientes cujo nome contem o trecho digitado */
+static void buscarPorNome(void) {
+    char trecho[50];
+    int encontrados = 0;
+
+    printf("Digite o nome (ou parte dele): ");
+    lerTexto(trecho, sizeof(trecho));
+
+    for (int i = 0; i < totalClientes; i++) {
+        if (contemTexto(clientes[i].nomeCliente, trecho)) {
+            printf("----------------------------------------\n");
+            mostrarCliente(&clientes[i]);
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        printf("\nNenhum cliente encontrado com \"%s\".\n", trecho);
+    } else {
+        printf("----------------------------------------\n");
+        printf("%d cliente(s) encontrado(s).\n", encontrados);
+    }
+}
+
+/* Busca por codigo, nome ou CPF. Depois de cada busca volta para este
+   menu, para poder buscar de novo; o 0 volta ao menu de clientes. */
+void buscarCliente(void) {
+    int opcao;
+    char cpf[12];
+
+    do {
+        limparTela();
+        printf("========================================\n");
+        printf("            BUSCAR CLIENTE\n");
+        printf("========================================\n");
+        printf("1 - Por codigo\n");
+        printf("2 - Por nome\n");
+        printf("3 - Por CPF\n");
+        printf("0 - Voltar ao menu de clientes\n");
+        printf("========================================\n");
+        printf("Escolha uma opcao: ");
+
+        opcao = lerInteiro();
+
+        switch (opcao) {
+
+            case 1:
+                printf("Digite o codigo do cliente: ");
+                mostrarResultado(procurarPorCodigo(lerInteiro()));
+                break;
+
+            case 2:
+                buscarPorNome();
+                break;
+
+            case 3:
+                printf("Digite o CPF (somente numeros): ");
+                lerDigitos(cpf, sizeof(cpf), 11, 11);
+                mostrarResultado(procurarPorCPF(cpf));
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+        }
+
+        if (opcao != 0) {
+            pausar();
+        }
+
+    } while (opcao != 0);
 }
 
 void alterarCliente(void) {

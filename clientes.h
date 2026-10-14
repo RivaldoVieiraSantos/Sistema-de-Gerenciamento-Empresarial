@@ -5,9 +5,10 @@
 
 #define MAX_CLIENTES 100
 
-/* Cadastro, listagem, alteracao e exclusao de clientes */
+/* Cadastro, listagem, busca, alteracao e exclusao de clientes */
 void cadastrarCliente(void);
 void listarClientes(void);
+void buscarCliente(void);
 void alterarCliente(void);
 void excluirCliente(void);
 

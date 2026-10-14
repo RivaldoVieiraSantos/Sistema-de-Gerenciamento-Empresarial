@@ -35,7 +35,7 @@ void menuClientes(void) {
                 break;
 
             case 3:
-                printf("\nFuncao de buscar cliente está em desenvolvimento.\n");
+                buscarCliente();
                 break;
 
             case 4:
@@ -54,9 +54,9 @@ void menuClientes(void) {
                 printf("\nOpcao invalida! Tente novamente.\n");
         }
 
-        /* Pausa para ler o resultado. O cadastro de cliente ja cuida das
-           proprias pausas, entao volta direto para este menu. */
-        if (opcao != 0 && opcao != 1) {
+        /* Pausa para ler o resultado. O cadastro e a busca de cliente ja
+           cuidam das proprias pausas, entao voltam direto para este menu. */
+        if (opcao != 0 && opcao != 1 && opcao != 3) {
             pausar();
         }
 
