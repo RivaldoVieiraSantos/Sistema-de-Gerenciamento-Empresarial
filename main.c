@@ -18,7 +18,7 @@ void menuClientes(void) {
         printf("3 - Buscar cliente\n");
         printf("4 - Alterar cliente\n");
         printf("5 - Excluir cliente\n");
-        printf("0 - Voltar\n");
+        printf("0 - Voltar ao menu principal\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
 
@@ -39,11 +39,11 @@ void menuClientes(void) {
                 break;
 
             case 4:
-                printf("\nFuncao de alterar cliente está em desenvolvimento.\n");
+                alterarCliente();
                 break;
 
             case 5:
-                printf("\nFuncao de excluir cliente está em desenvolvimento.\n");
+                excluirCliente();
                 break;
 
             case 0:
@@ -54,7 +54,9 @@ void menuClientes(void) {
                 printf("\nOpcao invalida! Tente novamente.\n");
         }
 
-        if (opcao != 0) {
+        /* Pausa para ler o resultado. O cadastro de cliente ja cuida das
+           proprias pausas, entao volta direto para este menu. */
+        if (opcao != 0 && opcao != 1) {
             pausar();
         }
 
@@ -75,7 +77,7 @@ void menuProdutos(void) {
         printf("3 - Buscar produto\n");
         printf("4 - Alterar produto\n");
         printf("5 - Excluir produto\n");
-        printf("0 - Voltar\n");
+        printf("0 - Voltar ao menu principal\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
 
