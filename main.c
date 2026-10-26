@@ -3,6 +3,7 @@
 #include "clientes.h"
 #include "produtos.h"
 #include "vendas.h"
+#include "relatorios.h"
 #include "utils.h"
 
 
@@ -177,6 +178,57 @@ void menuVendas(void) {
     } while (opcao != 0);
 }
 
+void menuRelatorios(void) {
+    int opcao;
+
+    do {
+        limparTela();
+        printf("========================================\n");
+        printf("         CONSULTAS E RELATORIOS         \n");
+        printf("========================================\n");
+        printf("1 - Resumo geral\n");
+        printf("2 - Produto mais vendido\n");
+        printf("3 - Cliente com maior volume de compras\n");
+        printf("4 - Produtos com estoque baixo\n");
+        printf("0 - Voltar ao menu principal\n");
+        printf("========================================\n");
+        printf("Escolha uma opcao: ");
+
+        opcao = lerInteiro();
+
+        switch (opcao) {
+
+            case 1:
+                resumoGeral();
+                break;
+
+            case 2:
+                produtoMaisVendido();
+                break;
+
+            case 3:
+                clienteQueMaisComprou();
+                break;
+
+            case 4:
+                listarEstoqueBaixo();
+                break;
+
+            case 0:
+                printf("\nVoltando ao menu principal...\n");
+                break;
+
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+        }
+
+        if (opcao != 0) {
+            pausar();
+        }
+
+    } while (opcao != 0);
+}
+
 
 void menuPrincipal(void) {
     int opcao;
@@ -189,7 +241,8 @@ void menuPrincipal(void) {
         printf("1 - Clientes\n");
         printf("2 - Produtos\n");
         printf("3 - Vendas\n");
-        printf("4 - Estatisticas\n");
+        printf("4 - Consultas e Relatorios\n");
+        printf("5 - Estatisticas\n");
         printf("0 - Sair\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
@@ -211,6 +264,10 @@ void menuPrincipal(void) {
                 break;
 
             case 4:
+                menuRelatorios();
+                break;
+
+            case 5:
                 printf("\nModulo de estatisticas está em desenvolvimento.\n");
                 pausar();
                 break;

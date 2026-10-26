@@ -129,6 +129,19 @@ Produto *obterProduto(int codigo) {
     return &produtos[i];
 }
 
+int totalDeProdutos(void) {
+    return totalProdutos;
+}
+
+float valorDoEstoque(void) {
+    float total = 0;
+
+    for (int i = 0; i < totalProdutos; i++) {
+        total += produtos[i].precoProduto * produtos[i].quantidadeProduto;
+    }
+    return total;
+}
+
 void cadastrarProduto(void) {
     if (totalProdutos >= MAX_PRODUTOS) {
         printf("\nLimite de %d produtos atingido.\n", MAX_PRODUTOS);

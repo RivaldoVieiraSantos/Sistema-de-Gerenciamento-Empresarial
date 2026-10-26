@@ -112,6 +112,10 @@ const Cliente *obterCliente(int codigo) {
     return &clientes[i];
 }
 
+int totalDeClientes(void) {
+    return totalClientes;
+}
+
 /* Retorna a posicao do cliente com esse CPF, ou -1 se nao existir */
 static int procurarPorCPF(const char *cpf) {
     for (int i = 0; i < totalClientes; i++) {

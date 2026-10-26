@@ -44,6 +44,7 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 | `clientes.h/c` | módulo de clientes (cadastro, listagem, busca, alteração e exclusão) |
 | `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração, exclusão e controle de estoque) |
 | `vendas.h/c`   | módulo de vendas (registro, listagem e busca) |
+| `relatorios.h/c` | consultas e relatórios (só leem os dados dos outros módulos) |
 | `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
 | `clientes.txt` | dados dos clientes: 1ª linha é o próximo código; depois `codigo;nome;cpf;telefone;cidade;email` |
 | `produtos.txt` | dados dos produtos: 1ª linha é o próximo código; depois `codigo;nome;categoria;preco;quantidade` |
@@ -77,6 +78,13 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 - [x] Buscar por código — `buscarVenda()`
 - O valor total é calculado de forma recursiva — `somarItens()` em `vendas.c`
 
+### Consultas e Relatórios
+
+- [x] Resumo geral — `resumoGeral()`: total de clientes, total de produtos, valor do estoque, quantidade de vendas e valor total vendido
+- [x] Produto mais vendido — `produtoMaisVendido()` (em unidades)
+- [x] Cliente com maior volume de compras — `clienteQueMaisComprou()` (em reais)
+- [x] Produtos com estoque baixo — `listarEstoqueBaixo()`
+
 ### Observações
 
 - O código do cliente e do produto é gerado automaticamente (1, 2, 3...).
@@ -92,13 +100,13 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 Linux/Mac:
 
 ```
-gcc main.c clientes.c produtos.c vendas.c utils.c -o sistema
+gcc main.c clientes.c produtos.c vendas.c relatorios.c utils.c -o sistema
 ```
 
 Windows:
 
 ```
-gcc main.c clientes.c produtos.c vendas.c utils.c -o sistema.exe
+gcc main.c clientes.c produtos.c vendas.c relatorios.c utils.c -o sistema.exe
 ```
 
 ## Executar

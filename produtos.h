@@ -30,4 +30,8 @@ void listarEstoqueBaixo(void);
    baixa no estoque direto nele), ou NULL se o codigo nao existir */
 Produto *obterProduto(int codigo);
 
+/* Usadas pelos relatorios */
+int totalDeProdutos(void);
+float valorDoEstoque(void);   /* soma de preco x quantidade de cada produto */
+
 #endif

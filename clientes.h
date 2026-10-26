@@ -19,4 +19,7 @@ void excluirCliente(void);
    o codigo nao existir */
 const Cliente *obterCliente(int codigo);
 
+/* Usada pelos relatorios: quantos clientes estao cadastrados */
+int totalDeClientes(void);
+
 #endif

@@ -140,6 +140,17 @@ static void mostrarVenda(const Venda *v) {
     printf("Total:    R$ %.2f\n", v->valorTotal);
 }
 
+int totalDeVendas(void) {
+    return totalVendas;
+}
+
+const Venda *obterVendaPorPosicao(int i) {
+    if (i < 0 || i >= totalVendas) {
+        return NULL;
+    }
+    return &vendas[i];
+}
+
 /* Retorna a posicao da venda no vetor, ou -1 se nao existir */
 static int procurarPorCodigo(int codigo) {
     for (int i = 0; i < totalVendas; i++) {
