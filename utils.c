@@ -6,7 +6,13 @@
 /* Lê uma linha de texto (aceita espaços) e remove o '\n' do final */
 void lerTexto(char *dest, int tamanho) {
     scanf(" ");  /* pula o '\n' que sobra de um scanf anterior */
-    fgets(dest, tamanho, stdin);
+
+    /* Fim da entrada (Ctrl+D, ou arquivo redirecionado que acabou): sem
+       isto, quem pergunta de novo ate vir certo ficaria em laco infinito. */
+    if (fgets(dest, tamanho, stdin) == NULL) {
+        printf("\nFim da entrada.\n");
+        exit(0);
+    }
 
     /* Se nao veio o '\n', a linha era maior que o campo: o resto ficaria
        no teclado e seria lido pela proxima pergunta. Descarta. */

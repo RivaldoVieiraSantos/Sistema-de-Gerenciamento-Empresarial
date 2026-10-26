@@ -9,6 +9,80 @@ static Cliente clientes[MAX_CLIENTES];
 static int totalClientes = 0;
 static int proximoCodigo = 1;
 
+/* Arquivo onde os clientes ficam salvos. Formato (texto, um cliente por linha):
+     1a linha: o proximo codigo a ser usado
+     demais:   codigo;nome;cpf;telefone;cidade;email                          */
+#define ARQUIVO_CLIENTES "clientes.txt"
+
+/* Grava todos os clientes no arquivo (reescreve o arquivo inteiro).
+   E chamada depois de cada cadastro, alteracao ou exclusao. */
+static void salvarClientes(void) {
+    FILE *arquivo = fopen(ARQUIVO_CLIENTES, "w");
+
+    if (arquivo == NULL) {
+        printf("\nAtencao: nao foi possivel salvar em %s.\n", ARQUIVO_CLIENTES);
+        return;
+    }
+
+    fprintf(arquivo, "%d\n", proximoCodigo);
+
+    for (int i = 0; i < totalClientes; i++) {
+        fprintf(arquivo, "%d;%s;%s;%s;%s;%s\n",
+                clientes[i].codCliente,
+                clientes[i].nomeCliente,
+                clientes[i].CPFCliente,
+                clientes[i].telefoneCliente,
+                clientes[i].cidadeCliente,
+                clientes[i].emailCliente);
+    }
+
+    fclose(arquivo);
+}
+
+/* Le os clientes do arquivo para a memoria. Chamada uma vez, quando o
+   programa abre. Se o arquivo ainda nao existe, comeca sem clientes. */
+void carregarClientes(void) {
+    FILE *arquivo = fopen(ARQUIVO_CLIENTES, "r");
+    char linha[300];
+
+    if (arquivo == NULL) {
+        return;  /* primeira execucao: ainda nao ha arquivo */
+    }
+
+    if (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        sscanf(linha, "%d", &proximoCodigo);
+    }
+
+    totalClientes = 0;
+    while (totalClientes < MAX_CLIENTES && fgets(linha, sizeof(linha), arquivo) != NULL) {
+        Cliente *c = &clientes[totalClientes];
+
+        /* %49[^;] le ate 49 caracteres que nao sejam ';' (cabe no campo de 50).
+           No email, para no fim da linha (\r aparece se o arquivo veio do Windows). */
+        int lidos = sscanf(linha, "%d;%49[^;];%11[^;];%15[^;];%49[^;];%79[^\r\n]",
+                           &c->codCliente, c->nomeCliente, c->CPFCliente,
+                           c->telefoneCliente, c->cidadeCliente, c->emailCliente);
+
+        if (lidos == 6) {
+            totalClientes++;  /* so aceita linhas completas; ignora linhas quebradas */
+        }
+    }
+
+    fclose(arquivo);
+}
+
+/* Le um texto do cliente (nome, cidade, email). Troca ';' por ',' porque o
+   ';' separa os campos no arquivo e quebraria a linha do cliente. */
+static void lerCampo(char *dest, int tamanho) {
+    lerTexto(dest, tamanho);
+
+    for (int i = 0; dest[i] != '\0'; i++) {
+        if (dest[i] == ';') {
+            dest[i] = ',';
+        }
+    }
+}
+
 /* Mostra os dados de um cliente (recebe o endereco, sem copiar a struct) */
 static void mostrarCliente(const Cliente *c) {
     printf("Codigo:   %d\n", c->codCliente);
@@ -86,7 +160,7 @@ static void editarCliente(int i) {
     printf("----------------------------------------\n");
 
     printf("Novo nome: ");
-    lerTexto(clientes[i].nomeCliente, sizeof(clientes[i].nomeCliente));
+    lerCampo(clientes[i].nomeCliente, sizeof(clientes[i].nomeCliente));
 
     printf("Novo CPF (somente numeros): ");
     lerCPFSemDuplicar(clientes[i].CPFCliente, sizeof(clientes[i].CPFCliente), i);
@@ -95,10 +169,12 @@ static void editarCliente(int i) {
     lerDigitos(clientes[i].telefoneCliente, sizeof(clientes[i].telefoneCliente), 10, 11);
 
     printf("Nova cidade: ");
-    lerTexto(clientes[i].cidadeCliente, sizeof(clientes[i].cidadeCliente));
+    lerCampo(clientes[i].cidadeCliente, sizeof(clientes[i].cidadeCliente));
 
     printf("Novo email: ");
-    lerTexto(clientes[i].emailCliente, sizeof(clientes[i].emailCliente));
+    lerCampo(clientes[i].emailCliente, sizeof(clientes[i].emailCliente));
+
+    salvarClientes();
 
     printf("----------------------------------------\n");
     printf("Cliente alterado com sucesso!\n");
@@ -124,6 +200,7 @@ static int excluirNaPosicao(int i) {
         clientes[j] = clientes[j + 1];
     }
     totalClientes--;
+    salvarClientes();
 
     printf("----------------------------------------\n");
     printf("Cliente excluido com sucesso!\n");
@@ -154,7 +231,7 @@ void cadastrarCliente(void) {
         printf("========================================\n");
 
         printf("Nome: ");
-        lerTexto(novo.nomeCliente, sizeof(novo.nomeCliente));
+        lerCampo(novo.nomeCliente, sizeof(novo.nomeCliente));
 
         printf("CPF (somente numeros): ");
         lerCPFSemDuplicar(novo.CPFCliente, sizeof(novo.CPFCliente), -1);
@@ -163,14 +240,15 @@ void cadastrarCliente(void) {
         lerDigitos(novo.telefoneCliente, sizeof(novo.telefoneCliente), 10, 11);
 
         printf("Cidade: ");
-        lerTexto(novo.cidadeCliente, sizeof(novo.cidadeCliente));
+        lerCampo(novo.cidadeCliente, sizeof(novo.cidadeCliente));
 
         printf("Email: ");
-        lerTexto(novo.emailCliente, sizeof(novo.emailCliente));
+        lerCampo(novo.emailCliente, sizeof(novo.emailCliente));
 
         clientes[totalClientes] = novo;
         totalClientes++;
         proximoCodigo++;
+        salvarClientes();
 
         printf("----------------------------------------\n");
         printf("Cliente \"%s\" cadastrado com sucesso!\n", novo.nomeCliente);

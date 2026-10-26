@@ -168,6 +168,7 @@ void menuPrincipal(void) {
 
 int main(void) {
 
+    carregarClientes();
     menuPrincipal();
 
     return 0;

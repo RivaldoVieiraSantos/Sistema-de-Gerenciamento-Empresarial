@@ -35,6 +35,7 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 | `clientes.h/c` | módulo de clientes (cadastro, listagem, busca, alteração e exclusão) |
 | `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração e exclusão) |
 | `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
+| `clientes.txt` | dados dos clientes: 1ª linha é o próximo código; depois `codigo;nome;cpf;telefone;cidade;email` |
 | `main.c`       | menus (só chama as funções dos módulos)                  |
 
 ## Funcionalidades
@@ -60,7 +61,8 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 - O código do cliente e do produto é gerado automaticamente (1, 2, 3...).
 - Não é permitido cadastrar dois clientes com o mesmo CPF.
 - O preço aceita vírgula ou ponto (ex.: `3,50` ou `3.50`).
-- Os dados ficam só na memória: somem quando o programa fecha.
+- Os clientes ficam salvos em `clientes.txt` (na pasta onde o programa roda) e são carregados ao abrir. Os produtos ainda ficam só na memória.
+- O repositório já traz 5 clientes fictícios em `clientes.txt` para testes. Para começar do zero, é só apagar o arquivo.
 - Limite de 100 clientes (`MAX_CLIENTES` em `clientes.h`) e 100 produtos (`MAX_PRODUTOS` em `produtos.h`).
 
 ## Compilar
