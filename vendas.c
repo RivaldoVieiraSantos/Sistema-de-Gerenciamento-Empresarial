@@ -295,6 +295,7 @@ void registrarVenda(void) {
         Produto *produto = obterProduto(nova.itens[i].codProduto);
         produto->quantidadeProduto -= nova.itens[i].quantidade;
     }
+    salvarProdutos();
 
     vendas[totalVendas] = nova;
     totalVendas++;

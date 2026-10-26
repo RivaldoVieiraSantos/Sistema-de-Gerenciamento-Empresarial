@@ -78,6 +78,8 @@ void menuProdutos(void) {
         printf("3 - Buscar produto\n");
         printf("4 - Alterar produto\n");
         printf("5 - Excluir produto\n");
+        printf("6 - Consultar estoque\n");
+        printf("7 - Produtos com estoque baixo\n");
         printf("0 - Voltar ao menu principal\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
@@ -104,6 +106,14 @@ void menuProdutos(void) {
 
             case 5:
                 excluirProduto();
+                break;
+
+            case 6:
+                consultarEstoque();
+                break;
+
+            case 7:
+                listarEstoqueBaixo();
                 break;
 
             case 0:
@@ -221,6 +231,7 @@ void menuPrincipal(void) {
 int main(void) {
 
     carregarClientes();
+    carregarProdutos();
     carregarVendas();
     menuPrincipal();
 

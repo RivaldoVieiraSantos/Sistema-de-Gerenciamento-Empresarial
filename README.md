@@ -42,10 +42,11 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 | -------------- | -------------------------------------------------------- |
 | `structs.h`    | structs compartilhadas (Cliente, Produto, ItemVenda, Venda) |
 | `clientes.h/c` | módulo de clientes (cadastro, listagem, busca, alteração e exclusão) |
-| `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração e exclusão) |
+| `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração, exclusão e controle de estoque) |
 | `vendas.h/c`   | módulo de vendas (registro, listagem e busca) |
 | `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
 | `clientes.txt` | dados dos clientes: 1ª linha é o próximo código; depois `codigo;nome;cpf;telefone;cidade;email` |
+| `produtos.txt` | dados dos produtos: 1ª linha é o próximo código; depois `codigo;nome;categoria;preco;quantidade` |
 | `vendas.txt`   | dados das vendas: 1ª linha é o próximo código; cada venda é uma linha `codigo;codCliente;data;totalItens;valorTotal` seguida de uma linha por item `codProduto;quantidade;precoUnitario;nome` |
 | `main.c`       | menus (só chama as funções dos módulos)                  |
 
@@ -66,6 +67,8 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 - [x] Buscar por código — `buscarProduto()`
 - [x] Alterar — `alterarProduto()`
 - [x] Excluir — `excluirProduto()`
+- [x] Consultar estoque — `consultarEstoque()`
+- [x] Produtos com estoque baixo — `listarEstoqueBaixo()` (5 unidades ou menos: `ESTOQUE_MINIMO` em `produtos.h`)
 
 ### Vendas
 
@@ -78,8 +81,9 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 
 - O código do cliente e do produto é gerado automaticamente (1, 2, 3...).
 - Não é permitido cadastrar dois clientes com o mesmo CPF.
-- O preço aceita vírgula ou ponto (ex.: `3,50` ou `3.50`).
-- Os clientes ficam salvos em `clientes.txt` (na pasta onde o programa roda) e são carregados ao abrir. Os produtos ainda ficam só na memória.
+- O preço aceita vírgula ou ponto (ex.: `3,50` ou `3.50`) e não pode ser negativo.
+- A quantidade em estoque precisa ser pelo menos 1 no cadastro; na alteração aceita 0 (estoque acabou).
+- Os clientes ficam salvos em `clientes.txt` (na pasta onde o programa roda) e são carregados ao abrir. Os produtos ficam em `produtos.txt` e as vendas em `vendas.txt`, do mesmo jeito.
 - O repositório já traz 5 clientes fictícios em `clientes.txt` para testes. Para começar do zero, é só apagar o arquivo.
 - Limite de 100 clientes (`MAX_CLIENTES` em `clientes.h`) e 100 produtos (`MAX_PRODUTOS` em `produtos.h`).
 

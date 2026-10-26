@@ -61,7 +61,14 @@ void lerDigitos(char *dest, int tamanho, int minimo, int maximo) {
 int lerInteiro(void) {
     int valor;
     int c;
-    if (scanf("%d", &valor) != 1) {
+    int lidos = scanf("%d", &valor);
+
+    /* Fim da entrada: mesmo motivo do lerTexto (evita laco infinito) */
+    if (lidos == EOF) {
+        printf("\nFim da entrada.\n");
+        exit(0);
+    }
+    if (lidos != 1) {
         valor = -1;
     }
     while ((c = getchar()) != '\n' && c != EOF);
@@ -69,9 +76,11 @@ int lerInteiro(void) {
 }
 
 /* Le um numero com casas decimais (ex.: preco).
-   Aceita virgula ou ponto: 3,50 ou 3.50 */
+   Aceita virgula ou ponto: 3,50 ou 3.50
+   Retorna -1 se nao foi digitado um numero (ex.: "abc" ou "3,50abc") */
 float lerDecimal(void) {
     char texto[50];
+    char *fim;
 
     lerTexto(texto, sizeof(texto));
 
@@ -81,7 +90,19 @@ float lerDecimal(void) {
         }
     }
 
-    return atof(texto);
+    /* strtod aponta 'fim' para onde parou de ler: se nao leu nada, ou se
+       sobrou alguma coisa depois do numero, a entrada nao era um numero */
+    float valor = strtod(texto, &fim);
+    if (fim == texto) {
+        return -1;
+    }
+    while (*fim == ' ' || *fim == '\r') {
+        fim++;  /* espaco sobrando no fim nao atrapalha */
+    }
+    if (*fim != '\0') {
+        return -1;
+    }
+    return valor;
 }
 
 /* Limpa o terminal. No Linux/Mac usa o codigo de controle do proprio
