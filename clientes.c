@@ -103,6 +103,15 @@ static int procurarPorCodigo(int codigo) {
     return -1;
 }
 
+const Cliente *obterCliente(int codigo) {
+    int i = procurarPorCodigo(codigo);
+
+    if (i == -1) {
+        return NULL;
+    }
+    return &clientes[i];
+}
+
 /* Retorna a posicao do cliente com esse CPF, ou -1 se nao existir */
 static int procurarPorCPF(const char *cpf) {
     for (int i = 0; i < totalClientes; i++) {

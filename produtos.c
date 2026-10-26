@@ -26,6 +26,15 @@ static int procurarPorCodigo(int codigo) {
     return -1;
 }
 
+Produto *obterProduto(int codigo) {
+    int i = procurarPorCodigo(codigo);
+
+    if (i == -1) {
+        return NULL;
+    }
+    return &produtos[i];
+}
+
 void cadastrarProduto(void) {
     if (totalProdutos >= MAX_PRODUTOS) {
         printf("\nLimite de %d produtos atingido.\n", MAX_PRODUTOS);

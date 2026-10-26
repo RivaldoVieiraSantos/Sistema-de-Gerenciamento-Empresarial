@@ -23,6 +23,15 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 - quantidadeProduto
 - categoriaProduto
 
+### Vendas
+
+- codVenda
+- codCliente
+- data
+- itens (até 20 produtos: codProduto, nomeProduto, quantidade, precoUnitario)
+- totalItens
+- valorTotal
+
 ### Estatísticas
 
 - ( será entregue na próxima etapa do trabalho )
@@ -31,11 +40,13 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 
 | Arquivo        | Responsabilidade                                         |
 | -------------- | -------------------------------------------------------- |
-| `structs.h`    | structs compartilhadas (Cliente, Produto)                |
+| `structs.h`    | structs compartilhadas (Cliente, Produto, ItemVenda, Venda) |
 | `clientes.h/c` | módulo de clientes (cadastro, listagem, busca, alteração e exclusão) |
 | `produtos.h/c` | módulo de produtos (cadastro, listagem, busca, alteração e exclusão) |
+| `vendas.h/c`   | módulo de vendas (registro, listagem e busca) |
 | `utils.h/c`    | funções compartilhadas: leitura (lerTexto, lerInteiro, lerDecimal) e tela (limparTela, pausar) |
 | `clientes.txt` | dados dos clientes: 1ª linha é o próximo código; depois `codigo;nome;cpf;telefone;cidade;email` |
+| `vendas.txt`   | dados das vendas: 1ª linha é o próximo código; cada venda é uma linha `codigo;codCliente;data;totalItens;valorTotal` seguida de uma linha por item `codProduto;quantidade;precoUnitario;nome` |
 | `main.c`       | menus (só chama as funções dos módulos)                  |
 
 ## Funcionalidades
@@ -56,6 +67,13 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 - [x] Alterar — `alterarProduto()`
 - [x] Excluir — `excluirProduto()`
 
+### Vendas
+
+- [x] Registrar — `registrarVenda()` (vários produtos por venda; confere se cliente e produto existem, não deixa vender mais que o estoque e dá baixa no estoque ao confirmar)
+- [x] Listar — `listarVendas()`
+- [x] Buscar por código — `buscarVenda()`
+- O valor total é calculado de forma recursiva — `somarItens()` em `vendas.c`
+
 ### Observações
 
 - O código do cliente e do produto é gerado automaticamente (1, 2, 3...).
@@ -70,13 +88,13 @@ Repositório: https://github.com/RivaldoVieiraSantos/Sistema-de-Gerenciamento-Em
 Linux/Mac:
 
 ```
-gcc main.c clientes.c produtos.c utils.c -o sistema
+gcc main.c clientes.c produtos.c vendas.c utils.c -o sistema
 ```
 
 Windows:
 
 ```
-gcc main.c clientes.c produtos.c utils.c -o sistema.exe
+gcc main.c clientes.c produtos.c vendas.c utils.c -o sistema.exe
 ```
 
 ## Executar

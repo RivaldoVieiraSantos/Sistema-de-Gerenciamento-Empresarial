@@ -22,4 +22,26 @@ typedef struct {
 
 } Produto;
 
+#define MAX_ITENS_VENDA 20
+
+/* Um produto dentro de uma venda. Guarda nome e preco do momento da venda:
+   se o produto for alterado ou excluido depois, a venda continua igual. */
+typedef struct {
+    int   codProduto;
+    char  nomeProduto[50];
+    int   quantidade;
+    float precoUnitario;
+
+} ItemVenda;
+
+typedef struct {
+    int       codVenda;
+    int       codCliente;
+    char      data[11];                  /* dd/mm/aaaa + '\0' */
+    ItemVenda itens[MAX_ITENS_VENDA];
+    int       totalItens;
+    float     valorTotal;
+
+} Venda;
+
 #endif

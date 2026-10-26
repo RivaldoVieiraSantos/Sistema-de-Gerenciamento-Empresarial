@@ -2,6 +2,7 @@
 #include "structs.h"
 #include "clientes.h"
 #include "produtos.h"
+#include "vendas.h"
 #include "utils.h"
 
 
@@ -120,6 +121,52 @@ void menuProdutos(void) {
     } while (opcao != 0);
 }
 
+void menuVendas(void) {
+    int opcao;
+
+    do {
+        limparTela();
+        printf("========================================\n");
+        printf("              MENU VENDAS               \n");
+        printf("========================================\n");
+        printf("1 - Registrar venda\n");
+        printf("2 - Listar vendas\n");
+        printf("3 - Buscar venda\n");
+        printf("0 - Voltar ao menu principal\n");
+        printf("========================================\n");
+        printf("Escolha uma opcao: ");
+
+        opcao = lerInteiro();
+
+        switch (opcao) {
+
+            case 1:
+                registrarVenda();
+                break;
+
+            case 2:
+                listarVendas();
+                break;
+
+            case 3:
+                buscarVenda();
+                break;
+
+            case 0:
+                printf("\nVoltando ao menu principal...\n");
+                break;
+
+            default:
+                printf("\nOpcao invalida! Tente novamente.\n");
+        }
+
+        if (opcao != 0) {
+            pausar();
+        }
+
+    } while (opcao != 0);
+}
+
 
 void menuPrincipal(void) {
     int opcao;
@@ -131,7 +178,8 @@ void menuPrincipal(void) {
         printf("========================================\n");
         printf("1 - Clientes\n");
         printf("2 - Produtos\n");
-        printf("3 - Estatisticas\n");
+        printf("3 - Vendas\n");
+        printf("4 - Estatisticas\n");
         printf("0 - Sair\n");
         printf("========================================\n");
         printf("Escolha uma opcao: ");
@@ -149,6 +197,10 @@ void menuPrincipal(void) {
                 break;
 
             case 3:
+                menuVendas();
+                break;
+
+            case 4:
                 printf("\nModulo de estatisticas está em desenvolvimento.\n");
                 pausar();
                 break;
@@ -169,6 +221,7 @@ void menuPrincipal(void) {
 int main(void) {
 
     carregarClientes();
+    carregarVendas();
     menuPrincipal();
 
     return 0;

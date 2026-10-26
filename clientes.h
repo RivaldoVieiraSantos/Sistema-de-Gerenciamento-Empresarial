@@ -15,4 +15,8 @@ void buscarCliente(void);
 void alterarCliente(void);
 void excluirCliente(void);
 
+/* Usada pelo modulo de vendas: devolve o endereco do cliente, ou NULL se
+   o codigo nao existir */
+const Cliente *obterCliente(int codigo);
+
 #endif
